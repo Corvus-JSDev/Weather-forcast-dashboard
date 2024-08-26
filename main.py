@@ -10,12 +10,14 @@ option = st.selectbox("Option", ("Temperature", "Sky Forcast"))
 subhead_text = f"{option} for {f'the next {days} days' if days > 1 else 'today'}"
 st.subheader(subhead_text)
 
-temp, dates = get_data(place, days, option)
+if place:
+	temp, dates = get_data(place, days, option)
 
-if option == "Temperature":
+if option == "Temperature" and place:
 	plot = px.line(x=dates, y=temp, labels={"x": "Dates", "y": "Temp"})
 	st.plotly_chart(plot)
-elif option == "Sky Forcast":
+elif option == "Sky Forcast" and place:
+	print(" ")
 
 
 
