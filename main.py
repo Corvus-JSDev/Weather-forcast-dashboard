@@ -11,13 +11,16 @@ subhead_text = f"{option} for {f'the next {days} days' if days > 1 else 'today'}
 st.subheader(subhead_text)
 
 if place:
-	temp, dates = get_data(place, days, option)
+	data, dates = get_data(place, days, option)
+
 
 if option == "Temperature" and place:
-	plot = px.line(x=dates, y=temp, labels={"x": "Dates", "y": "Temp"})
+	plot = px.line(x=dates, y=data, labels={"x": "Dates", "y": "Temp"})
 	st.plotly_chart(plot)
+
 elif option == "Sky Forcast" and place:
-	print(" ")
+	for item in data:
+		st.image(f"images/{item.lower()}.png")
 
 
 
