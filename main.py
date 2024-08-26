@@ -19,9 +19,8 @@ if option == "Temperature" and place:
 	st.plotly_chart(plot)
 
 elif option == "Sky Forcast" and place:
-	for item in data:
-		st.image(f"images/{item.lower()}.png")
-
+	img_list = [f"images/{item.lower()}.png" for item in data]
+	st.image(img_list, width=115)
 
 
 
