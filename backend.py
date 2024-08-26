@@ -13,14 +13,13 @@ def get_data(place, days, option):
 	# The data will return a list of 40 objects. One object accounts for 3 hours. There is enough data for the next 5 days. 8 objects accounts for one day.
 	filtered_data = data[:8*days]
 
-	temp_list = []
 	if option == "Temperature":
-		for item in filtered_data:
-			temp_list.append(item["main"]["temp"])
+		temp_list = [item["main"]["temp"] for item in filtered_data]
 
 	elif option == "Sky Forcast":
-		for item in filtered_data:
-			temp_list.append(item["weather"][0]["main"])
+		temp_list = [item["weather"][0]["main"] for item in filtered_data]
+	else:
+		temp_list = None
 
 	return temp_list
 
@@ -30,5 +29,4 @@ def get_data(place, days, option):
 
 if __name__ == "__main__":
 	print(get_data("Tokyo", 1, "Temperature"))
-	# get_data("Tokyo", 3, "Sky Forcast")
 
