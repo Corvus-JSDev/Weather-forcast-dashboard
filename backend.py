@@ -15,18 +15,25 @@ def get_data(place, days, option):
 
 	if option == "Temperature":
 		temp_list = [item["main"]["temp"] for item in filtered_data]
+		dates = [item["dt_txt"] for item in filtered_data]
 
 	elif option == "Sky Forcast":
 		temp_list = [item["weather"][0]["main"] for item in filtered_data]
+		dates = [item["dt_txt"] for item in filtered_data]
+
 	else:
 		temp_list = None
+		dates = None
 
-	return temp_list
+	return temp_list, dates
 
 
 
 
 
 if __name__ == "__main__":
-	print(get_data("Tokyo", 1, "Temperature"))
+	get_data = get_data("Tokyo", 1, "Temperature")
+	print(get_data[0])
+	print(get_data[1])
+
 
