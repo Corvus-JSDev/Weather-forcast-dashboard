@@ -11,16 +11,26 @@ degree = st.selectbox("Degree", ("Fahrenheit", "Celsius"))
 subhead_text = f"{option} for {f'the next {days} days' if days > 1 else 'today'}"
 st.subheader(subhead_text)
 
-if place:
-	data, dates = get_data(place, days, option, degree)
 
-	if option == "Temperature":
-		plot = px.line(x=dates, y=data, labels={"x": "Date and Time", "y": f"Temp in {degree}"})
-		st.plotly_chart(plot)
+try:
+	if place:
+		data, dates = get_data(place, days, option, degree)
 
-	elif option == "Sky Forcast":
-		img_list = [f"images/{item.lower()}.png" for item in data]
-		st.image(img_list, width=115)
+		if option == "Temperature":
+			plot = px.line(x=dates, y=data, labels={"x": "Date and Time", "y": f"Temp in {degree}"})
+			st.plotly_chart(plot)
+
+		elif option == "Sky Forcast":
+			img_list = [f"images/{item.lower()}.png" for item in data]
+			st.image(img_list, width=115)
+
+except KeyError:
+	st.write(f"{place} was not found. Please search for only the city name.")
+
+	st.write("Examples:")
+	st.write("✅ \"New York\"")
+	st.write("❌ \"New York, NY\"")
+	st.write("❌ \"New York, NY, USA\"")
 
 
 
